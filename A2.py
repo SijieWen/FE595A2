@@ -7,11 +7,11 @@ for i in range(50):
     resp = get("https://www.theyfightcrime.org/")
     text = resp.text.split("</P>")
     
-    he_list = re.findall(r"<P>(He[^.]*\.)", text[1])   # find male characters
+    he_list = re.findall(r"<P>(.*(?=She))", text[1])   # find male characters
     he_str = " ".join(he_list)
     male_file.write(str(i+1)+":"+he_str+'\n')
     
-    she_list = re.findall(r"(She[^.]*\.)", text[1])    # find female characters
+    she_list = re.findall(r"(She.*(?=They))", text[1])    # find female characters
     she_str = " ".join(she_list)
     female_file.write(str(i+1)+":"+she_str+'\n')
 
